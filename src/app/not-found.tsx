@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const NotFound: React.FC = () => {
@@ -15,12 +16,12 @@ const NotFound: React.FC = () => {
         />
         <h1 className="text-3xl font-bold mb-2 ">Página no encontrada</h1>
         <p className="mb-6 ">La página que buscas no existe o fue removida.</p>
-        <a
+        <Link
           href="/"
           className="bg-[#bfa16a] hover:bg-[#a88a4a] font-semibold py-2 px-6 rounded transition-colors"
         >
           Volver al inicio
-        </a>
+        </Link>
       </div>
     </div>
   );

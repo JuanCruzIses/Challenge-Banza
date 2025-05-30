@@ -10,8 +10,8 @@ import type { Artwork } from "./types/interface";
 function Home() {
   const [numberPage, setNumberPage] = useState<number>(1);
 
-  const { data, loading, error }: { data: Artwork[]; loading: boolean; error: boolean } = useGetData(numberPage);
-
+  const { data, loading, error }: { data: Artwork[]; loading: boolean; error: string | null } = useGetData(numberPage);
+  
   if (loading) return <SkeletonStructure />;
   if (error) return <Error/>
   if (!data || data.length === 0) return <div className="text-center py-8"><h2>No hay datos para mostrar.</h2></div>;

@@ -3,11 +3,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { ArtworkDetailType } from "@/app/types/interface";
 
-interface ArtworkDetailProps {
-  params: { id: string };
-}
-
-const ArtworkDetail: React.FC<ArtworkDetailProps> = ({ params }) => {
+const ArtworkDetail = ({ params }: { params: { id: string } }) => {  
   const [artworkDetail, setArtworkDetail] = useState<ArtworkDetailType | null>(null);
   const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);

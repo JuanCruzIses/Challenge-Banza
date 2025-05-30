@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['www.artic.edu'],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

@@ -4,7 +4,7 @@ export const favoriteHandler = (
   imageId: string | null | undefined,
   artworkDetail: FavoriteArtwork
 ): void => {  
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favorites: FavoriteArtwork[] = JSON.parse(localStorage.getItem('favorites') || '[]');
     const index = favorites.findIndex(favorite => favorite.id === imageId);
 
     if (index === -1) {

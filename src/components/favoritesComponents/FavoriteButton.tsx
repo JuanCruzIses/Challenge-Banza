@@ -1,18 +1,6 @@
 import React from 'react';
 import useFavorites from '@/app/hooks/useFavorites';
-
-interface ArtworkDetail {
-  id: string | null;
-  image_id: string | null;
-  title: string;
-  artist: string;
-  api_link: string;
-  alt: string;
-  short_description: string | null;
-  description: string | null;
-  gallery_title: string | null;
-  subject_titles: string[];
-}
+import type { ArtworkDetail } from "@/app/types/interface";
 
 interface FavoriteButtonProps {
   image_id: string;
