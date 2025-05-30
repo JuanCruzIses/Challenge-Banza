@@ -3,7 +3,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { ArtworkDetailType } from "@/app/types/interface";
 
-const ArtworkDetail = ({ params }: { params: { id: string } }) => {  
+
+export default function ArtworkDetail() {  
   const [artworkDetail, setArtworkDetail] = useState<ArtworkDetailType | null>(null);
   const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -88,4 +89,4 @@ const ArtworkDetail = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default ArtworkDetail;
+// export default ArtworkDetail;
