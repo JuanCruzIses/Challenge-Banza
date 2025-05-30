@@ -1,3 +1,24 @@
+Aplicación del Catálogo del Instituto de Arte de Chicago
+
+El usuario debería poder ver una miniatura y una breve descripción de cada obra de arte en la pantalla principal de la aplicación.
+
+Al hacer clic en una miniatura, el usuario debe ser dirigido a una pantalla detallada de la obra de arte que contenga una imagen de mejor calidad y más información detallada sobre la pieza, el autor y cualquier otro dato que consideres relevante para el usuario final.
+
+El usuario debería poder guardar algunas obras de arte como favoritas y explorarlas incluso después de que la aplicación esté completamente cerrada y vuelta a abrir.
+
+La aplicación debe ser funcional en cualquiera de los tamaños estándares (desktop, tablet y mobile)
+
+
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -34,3 +55,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
