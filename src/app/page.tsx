@@ -1,25 +1,22 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+import React from "react";
 import CarouselImages from "@/components/commonComponents/Carousel";
 import ArtworkList from "../components/indexComponents/ArtworkList";
-import {useGetData} from "./hooks/useGetData";
 import SkeletonStructure from "@/components/commonComponents/SkeletonStructure";
 import Error from "@/components/commonComponents/Error";
-import type { Artwork } from "./types/interface";
+import { useArtworks } from "./store/ArtworksContext";
 
 function Home() {
-  const [numberPage, setNumberPage] = useState<number>(1);
+  const { artworks, loading, error, setNumberPage, numberPage } = useArtworks();
 
-  const { data, loading, error }: { data: Artwork[]; loading: boolean; error: string | null } = useGetData(numberPage);
-  
   if (loading) return <SkeletonStructure />;
-  if (error) return <Error/>
-  if (!data || data.length === 0) return <div className="text-center py-8"><h2>No hay datos para mostrar.</h2></div>;
+  if (error) return <Error />;
+  if (!artworks || artworks.length === 0) return <div className="text-center py-8"><h2>No hay datos para mostrar.</h2></div>;
 
   return (
     <>
       <h1 className="text-3xl py-6 md:py-8 lg:py-12 text-center font-bold underline">¡Bienvenido!</h1>
-      <CarouselImages data={data} />
+      <CarouselImages data={artworks} />
       <div className="grid grid-rows-[auto_1fr] items-center justify-items-center min-h-screen p-8 pb-14 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <div>
           <h2 className="font-bold underline">Obras de arte</h2>
@@ -29,7 +26,7 @@ function Home() {
         </div>
         <div className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           <ArtworkList
-            data={data}
+            data={artworks}
             loading={loading}
             error={error}
             setNumberPage={setNumberPage}

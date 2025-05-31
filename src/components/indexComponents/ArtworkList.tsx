@@ -28,7 +28,9 @@ const ArtworkList: React.FC<ArtworkListProps> = ({
   if (!data || data.length === 0) {
     return <p className="text-gray-500 text-center col-span-full">No se encontraron obras de arte.</p>;
   }
-
+  data.map((artwork) => (
+    artwork.alt_image_ids.length && console.log(artwork.alt_image_ids)
+  ))
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
       {data.map((artwork) => (

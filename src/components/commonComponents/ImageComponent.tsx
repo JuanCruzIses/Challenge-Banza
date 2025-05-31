@@ -33,8 +33,6 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
   if (res == null) {
     return (
       <>
-      {console.log('aca')}
-      {console.log(res)}
       <Image
         src="/not_avaible.png"
         width={160}

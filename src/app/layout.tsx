@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/headerComponents/Header";
 import Footer from "@/components/footerComponents/Footer";
+import { ArtworksProvider } from "./store/ArtworksContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,19 +26,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <ArtworksProvider>
+      <html lang="en">
+        <head>
+          <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-        <Header/>
-        <main className="min-h-[75vh]">
-          {children}
-        </main>
-        <Footer/>
-      </body>
-    </html>
+          <Header />
+          <main className="min-h-[75vh]">
+            {children}
+          </main>
+          <Footer />
+        </body>
+      </html>
+    </ArtworksProvider>
   );
 }

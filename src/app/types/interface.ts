@@ -19,6 +19,7 @@ export interface Artwork {
   description: string;
   gallery_title: string;
   subject_titles: string;
+  alt_image_ids: string[];
 }
 
 // FetchApi.ts
