@@ -15,6 +15,7 @@ interface ArtModalProps {
   gallery_title: string;
   subject_titles: string;
   loading?: boolean;
+  alt_image_ids: string[]
 }
 
 const ArtModal: React.FC<ArtModalProps> = ({
@@ -29,6 +30,7 @@ const ArtModal: React.FC<ArtModalProps> = ({
   gallery_title,
   subject_titles,
   loading = true,
+  alt_image_ids
 }) => {
     if (alt == null) {
         alt = { alt_text: "No disponible" }
@@ -46,7 +48,8 @@ const ArtModal: React.FC<ArtModalProps> = ({
         short_description: short_description,
         description: description,
         gallery_title: gallery_title,
-        subject_titles: subject_titles
+        subject_titles: subject_titles,
+        alt_image_ids: alt_image_ids
     }
 
     const storage = () => {

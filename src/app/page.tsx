@@ -12,7 +12,7 @@ function Home() {
   if (loading) return <SkeletonStructure />;
   if (error) return <Error />;
   if (!artworks || artworks.length === 0) return <div className="text-center py-8"><h2>No hay datos para mostrar.</h2></div>;
-
+  
   return (
     <>
       <h1 className="text-3xl py-6 md:py-8 lg:py-12 text-center font-bold underline">¡Bienvenido!</h1>

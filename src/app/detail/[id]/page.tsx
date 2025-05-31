@@ -2,22 +2,32 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { ArtworkDetailType } from "@/app/types/interface";
+import { useArtworks } from "../../store/ArtworksContext";
 
 
-export default function ArtworkDetail() {  
+export default function ArtworkDetail() {
   const [artworkDetail, setArtworkDetail] = useState<ArtworkDetailType | null>(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
-
+  const { artworks, loading, error, setNumberPage, numberPage } = useArtworks();
+  const [arrayImages, setArrayImages] = useState<string[]>([]);
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = sessionStorage.getItem("artworkDetail");
       if (stored) {
-        setArtworkDetail(JSON.parse(stored));
+        const detail = JSON.parse(stored);
+        setArtworkDetail(detail);
+        // Buscar en artworks el objeto con el mismo title
+        const found = artworks.find(a => a.title === detail.title);
+        if (found && Array.isArray(found.alt_image_ids)) {
+          setArrayImages(found.alt_image_ids);
+        } else {
+          setArrayImages([]);
+        }
       }
-      setLoading(false);
     }
-  }, []);
+  }, [artworks]);
+  console.log(arrayImages)
 
   const handleImageError = useCallback(() => {
     setImageError(true);
@@ -31,27 +41,43 @@ export default function ArtworkDetail() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f7f5f0] to-[#e9e3d7] py-10 px-2">
       <div className="relative w-full max-w-4xl bg-[#f7f5f0] rounded-[32px_8px_32px_8px] border-8 border-[#5a3a1b] shadow-2xl flex flex-col md:flex-row overflow-hidden">
-        <div className="relative flex-shrink-0 flex items-center justify-center w-full md:w-1/2 bg-[#f0e6d6]">
-          {showFallback ? (
-            <Image
-              src="/not_avaible.png"
-              width={320}
-              height={320}
-              alt="Imagen no disponible"
-              className="object-contain h-[320px] w-[80%] rounded-[24px_6px_24px_6px] shadow-lg border-4"
-              priority
-            />
-          ) : (
-            <Image
-              src={`https://www.artic.edu/iiif/2/${artworkDetail.image_id}/full/843,/0/default.jpg`}
-              width={320}
-              height={320}
-              alt={artworkDetail.alt || artworkDetail.title || "Obra de arte"}
-              className="object-contain h-[320px] w-[80%] rounded-[24px_6px_24px_6px] shadow-lg border-4"
-              onError={handleImageError}
-              loading="eager"
-              priority
-            />
+        <div className="flex flex-col items-center w-full md:w-1/2 bg-[#f0e6d6] py-6 px-2">
+          <div className="flex justify-center items-center w-full mb-4">
+            {showFallback ? (
+              <Image
+                src="/not_avaible.png"
+                width={400}
+                height={400}
+                alt="Imagen no disponible"
+                className="object-contain h-[340px] w-full max-w-[400px] rounded-[24px_6px_24px_6px] shadow-lg border-4"
+                priority
+              />
+            ) : (
+              <Image
+                src={`https://www.artic.edu/iiif/2/${artworkDetail.image_id}/full/843,/0/default.jpg`}
+                width={400}
+                height={400}
+                alt={artworkDetail.alt || artworkDetail.title || "Obra de arte"}
+                className="object-contain h-[340px] w-full max-w-[400px] rounded-[24px_6px_24px_6px] shadow-lg border-4"
+                onError={handleImageError}
+                loading="eager"
+                priority
+              />
+            )}
+          </div>
+          {arrayImages.length > 0 && (
+            <div className="flex flex-wrap gap-3 justify-center items-center w-full">
+              {arrayImages.map((image, idx) => (
+                <Image
+                  key={image + idx}
+                  src={`https://www.artic.edu/iiif/2/${image}/full/200,/0/default.jpg`}
+                  width={70}
+                  height={70}
+                  alt={`Imagen complementaria ${idx + 1}`}
+                  className="hover:scale rounded-lg border-2 border-[#bfa16a] shadow-sm object-cover transition-transform hover:scale-115 bg-[#f0e6d6]"
+                />
+              ))}
+            </div>
           )}
           <div className="absolute top-4 right-4 z-20"></div>
         </div>
@@ -82,6 +108,7 @@ export default function ArtworkDetail() {
                 <span className="text-[#b48a5a]">Sin categorías</span>
               )}
             </div>
+
           </div>
         </div>
       </div>
