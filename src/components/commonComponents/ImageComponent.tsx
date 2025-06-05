@@ -39,6 +39,7 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
         height={160}
         alt={alt}
         className={`${!styles ? "object-contain h-full w-full" : styles}`}
+        unoptimized
         />
         </>
     );
@@ -57,6 +58,7 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
         if (src !== "/not_avaible.png") setSrc("/not_avaible.png");
       }}
       style={{ display: loadingImage ? 'none' : 'block' }}
+      unoptimized
     />
   );
 }

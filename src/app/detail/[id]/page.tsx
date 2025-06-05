@@ -50,6 +50,7 @@ export default function ArtworkDetail() {
                 alt="Imagen no disponible"
                 className="object-contain h-[340px] w-full max-w-[400px] rounded-[24px_6px_24px_6px] shadow-lg border-4"
                 priority
+                unoptimized
               />
             ) : (
               <Image
@@ -61,6 +62,7 @@ export default function ArtworkDetail() {
                 onError={handleImageError}
                 loading="eager"
                 priority
+                unoptimized
               />
             )}
           </div>
@@ -74,6 +76,7 @@ export default function ArtworkDetail() {
                   height={70}
                   alt={`Imagen complementaria ${idx + 1}`}
                   className="hover:scale rounded-lg border-2 border-[#bfa16a] shadow-sm object-cover transition-transform hover:scale-115 bg-[#f0e6d6]"
+                unoptimized
                 />
               ))}
             </div>
