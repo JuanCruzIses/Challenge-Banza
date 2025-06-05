@@ -1,5 +1,5 @@
 "use client";
-import ArtModal from '../../../components/indexComponents/ArtModal';
+import ArtModal from '@/components/commonComponents/ArtModal';
 import React from 'react';
 import { useGetFavorite } from '@/app/hooks/useGetData';
 import Error from '../../../components/commonComponents/Error';
