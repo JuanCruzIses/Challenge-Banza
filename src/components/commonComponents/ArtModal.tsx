@@ -1,7 +1,7 @@
 import React from 'react'
 import ImageComponent from '../commonComponents/ImageComponent'
 import Link from 'next/link'
-import FavoriteButton from '../favoritesComponents/FavoriteButton'
+import FavoriteButton from '../../app/favorites/components/FavoriteButton'
 
 interface ArtModalProps {
   id: string;

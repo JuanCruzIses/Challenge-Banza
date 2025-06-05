@@ -27,7 +27,6 @@ export default function ArtworkDetail() {
       }
     }
   }, [artworks]);
-  console.log(arrayImages)
 
   const handleImageError = useCallback(() => {
     setImageError(true);

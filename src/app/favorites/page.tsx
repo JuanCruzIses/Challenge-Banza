@@ -1,5 +1,5 @@
 "use client";
-import FavoriteList from '@/components/favoritesComponents/FavoriteList';
+import FavoriteList from '@/app/favorites/components/FavoriteList';
 import React from 'react';
 
 const Favorite: React.FC = () => (

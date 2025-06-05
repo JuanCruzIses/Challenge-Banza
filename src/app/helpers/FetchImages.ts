@@ -5,7 +5,7 @@ interface FetchImageResult {
 }
 
 const FetchImages = async (idImage: string): Promise<FetchImageResult> => {
-     const url = `https://www.artic.edu/iiif/2/${idImage}/full/843,/0/default.jpg`;
+    const url = `https://www.artic.edu/iiif/2/${idImage}/full/843,/0/default.jpg`;
     if (!idImage) return { data: null };
     try {
         const data = await fetch(url);

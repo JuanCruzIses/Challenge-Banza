@@ -1,8 +1,9 @@
 "use client";
-import ArtModal from '../indexComponents/ArtModal';
+import ArtModal from '../../../components/indexComponents/ArtModal';
 import React from 'react';
 import { useGetFavorite } from '@/app/hooks/useGetData';
-import Error from '../commonComponents/Error';
+import Error from '../../../components/commonComponents/Error';
+import SkeletonStructure from '../../../components/commonComponents/SkeletonStructure';
 
 interface Artwork {
   id: string;
@@ -21,7 +22,7 @@ const FavoriteList: React.FC = () => {
   const { favorites, loading, error } = useGetFavorite();
 
   if (loading) {
-    return <p className="text-gray-500 text-center col-span-full">Cargando obras de arte...</p>;
+    return <SkeletonStructure/>
   }
   if (error) {
     return <Error/>;

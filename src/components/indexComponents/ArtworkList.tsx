@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import ButtonsArtworkList from './ButtonsArtworkList';
-import ArtModal from './ArtModal';
+import ArtModal from '../commonComponents/ArtModal';
 import { Artwork } from '@/app/types/interface';
 
 interface ArtworkListProps {
