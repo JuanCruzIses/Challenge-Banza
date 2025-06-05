@@ -16,6 +16,7 @@ interface Artwork {
   description: string;
   gallery_title: string;
   subject_titles: string;
+  alt_image_ids?: string[];
 }
 
 const FavoriteList: React.FC = () => {
@@ -47,6 +48,7 @@ const FavoriteList: React.FC = () => {
           gallery_title={artwork.gallery_title}
           subject_titles={artwork.subject_titles}
           loading={loading}
+          alt_image_ids={artwork.alt_image_ids ?? []}
         />
       ))}
     </section>

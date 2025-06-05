@@ -9,6 +9,7 @@ interface ImageListProps {
   alt: string;
   styles: string | boolean;
   loading: boolean;
+  unoptimized: boolean;
 }
 
 interface ImageResponse {
