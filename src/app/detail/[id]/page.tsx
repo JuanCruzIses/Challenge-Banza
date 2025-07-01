@@ -11,6 +11,7 @@ export default function ArtworkDetail() {
   const [imageError, setImageError] = useState(false);
   const { artworks, loading, error, setNumberPage, numberPage } = useArtworks();
   const [arrayImages, setArrayImages] = useState<string[]>([]);
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = sessionStorage.getItem("artworkDetail");

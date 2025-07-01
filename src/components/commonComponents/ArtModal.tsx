@@ -69,7 +69,7 @@ const ArtModal: React.FC<ArtModalProps> = ({
       onClick={() => storage()}
       className="w-full mb-4 rounded-[24px_6px_24px_6px] overflow-hidden shadow-md h-[180px] flex items-center justify-center"
     >
-      {image_id && <ImageComponent idImage={image_id} alt={alt?.alt_text || "No disponible"} styles={false} loading={loading} priority={priority} />}
+      {image_id && <ImageComponent idImage={image_id} alt={alt?.alt_text || "No disponible"} styles={false} loading={loading} unoptimized priority={priority} />}
     </Link>
     <div className="grid lg:flex flex-col justify-around h-[220px] w-full">
       <h2 className="h-auto font-bold text-[#3e2610] mb-1 drop-shadow-sm w-full flex justify-center overflow-auto lg:max-h-[100px]">

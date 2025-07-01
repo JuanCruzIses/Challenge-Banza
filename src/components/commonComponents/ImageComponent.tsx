@@ -49,7 +49,8 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
 
   return (
     <Image
-      src={`https://www.artic.edu/iiif/2/${idImage}/full/200,/0/default.jpg`}
+      src={`https://www.artic.edu/iiif/2/${idImage}/full/843,/0/default.jpg`}
+      // src={`https://www.artic.edu/iiif/2/${idImage}/full/200,/0/default.jpg`}
       width={160}
       height={160}
       alt={alt}
