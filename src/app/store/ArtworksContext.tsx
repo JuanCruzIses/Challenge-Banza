@@ -44,8 +44,17 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return () => { isMounted = false; };
   }, [numberPage]);
 
-  return (
-    <ArtworksContext.Provider value={{ artworks, setArtworks, loading, error, setNumberPage, numberPage }}>
+    return (
+    <ArtworksContext.Provider
+      value={{
+        artworks,
+        setArtworks,
+        loading,
+        error,
+        numberPage,
+        setNumberPage, // Pasar el setter directamente
+      }}
+    >
       {children}
     </ArtworksContext.Provider>
   );
@@ -53,6 +62,6 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
 export const useArtworks = () => {
   const context = useContext(ArtworksContext);
-  if (!context) throw new Error("useArtworks must be used within ArtworksProvider");
+  if (!context) throw new Error("useArtworks debe usarse dentro de ArtworksProvider");
   return context;
 };

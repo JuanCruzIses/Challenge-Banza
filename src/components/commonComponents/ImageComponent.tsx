@@ -9,7 +9,7 @@ interface ImageListProps {
   alt: string;
   styles: string | boolean;
   loading: boolean;
-  unoptimized: boolean;
+  priority?: boolean;
 }
 
 interface ImageResponse {
@@ -17,7 +17,7 @@ interface ImageResponse {
   error?: string;
 }
 
-const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loading }) => {
+const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loading, priority = false }) => {
   const [loadingImage, setLoadingImage] = React.useState(loading);
   const [src, setSrc] = React.useState<string | undefined>(undefined);
   const res = UseGetImages(idImage) as ImageResponse | null;
@@ -40,8 +40,8 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
         height={160}
         alt={alt}
         className={`${!styles ? "object-contain h-full w-full" : styles}`}
-        unoptimized
-        />
+        priority={priority}
+      />
         </>
     );
   }
@@ -59,7 +59,7 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
         if (src !== "/not_avaible.png") setSrc("/not_avaible.png");
       }}
       style={{ display: loadingImage ? 'none' : 'block' }}
-      unoptimized
+      priority={priority}
     />
   );
 }

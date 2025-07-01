@@ -31,7 +31,7 @@ const ArtworkList: React.FC<ArtworkListProps> = ({
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
-      {data.map((artwork) => (
+      {data.map((artwork, idx) => (
         <ArtModal
           key={artwork.id}
           id={artwork.id}
@@ -45,6 +45,7 @@ const ArtworkList: React.FC<ArtworkListProps> = ({
           gallery_title={artwork.gallery_title}
           subject_titles={artwork.subject_titles}
           alt_image_ids={artwork.alt_image_ids}
+          priority={idx === 0} // Solo la primera imagen visible tiene priority
         />
       ))}
       <div className="col-span-full text-center mt-4">
