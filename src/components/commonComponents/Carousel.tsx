@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import ImageList from './ImageComponent'
+import Image from 'next/image'
 
 interface Artwork {
   id: string | number;
@@ -44,11 +44,18 @@ const CarouselImages: React.FC<CarouselImagesProps> = ({ data }) => {
                 <div
                   className="rounded-[18px] shadow-lg bg-[#f8f4ec] border-4 border-[#5a3a1b] p-2 flex items-center justify-center aspect-square w-[260px] h-[260px] md:w-[220px] md:h-[220px] lg:w-[260px] lg:h-[260px]"
                 >
-                  <ImageList
-                    idImage={artwork.image_id}
+                  <Image
+                    src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
+                    width={260}
+                    height={260}
                     alt={artwork.thumbnail?.alt_text || artwork.title || "Obra de arte"}
-                    styles="object-contain w-full h-full rounded-[12px]"
-                    loading={loading}
+                    className="object-contain w-full h-full rounded-[12px]"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/not_avaible.png";
+                    }}
+                    loading="eager"
+                    priority
                   />
                   <span className='absolute truncate px-2 font-bold bottom-0 bg-[#f8f4ec] w-full rounded-b-[12px] border-4 border-[#5a3a1b] border-t-0 text-center'>
                     {artwork.title}
