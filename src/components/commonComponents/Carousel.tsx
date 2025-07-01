@@ -49,7 +49,6 @@ const CarouselImages: React.FC<CarouselImagesProps> = ({ data }) => {
                     alt={artwork.thumbnail?.alt_text || artwork.title || "Obra de arte"}
                     styles="object-contain w-full h-full rounded-[12px]"
                     loading={loading}
-                    unoptimized
                   />
                   <span className='absolute truncate px-2 font-bold bottom-0 bg-[#f8f4ec] w-full rounded-b-[12px] border-4 border-[#5a3a1b] border-t-0 text-center'>
                     {artwork.title}

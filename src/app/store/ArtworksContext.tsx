@@ -8,7 +8,7 @@ interface ArtworksContextType {
   setArtworks: (artworks: Artwork[]) => void;
   loading: boolean;
   error: string | null;
-  setNumberPage: (page: number) => void;
+  setNumberPage: React.Dispatch<React.SetStateAction<number>>;
   numberPage: number;
 }
 
