@@ -48,19 +48,29 @@ const ImageList: React.FC<ImageListProps> = ({ idImage, alt, styles = false, loa
   if (src === undefined) return <SingleSkeleton />;
 
   return (
+    // <Image
+    //   src={`https://www.artic.edu/iiif/2/${idImage}/full/843,/0/default.jpg`}
+    //   // src={`https://www.artic.edu/iiif/2/${idImage}/full/200,/0/default.jpg`}
+    //   width={160}
+    //   height={160}
+    //   alt={alt}
+    //   className={`${!styles ? "object-contain h-full w-full" : styles}`}
+    //   onLoad={() => setLoadingImage(false)}
+    //   onError={() => {
+    //     if (src !== "/not_avaible.png") setSrc("/not_avaible.png");
+    //   }}
+    //   style={{ display: loadingImage ? 'none' : 'block' }}
+    //   priority={priority}
+    // />
     <Image
       src={`https://www.artic.edu/iiif/2/${idImage}/full/843,/0/default.jpg`}
-      // src={`https://www.artic.edu/iiif/2/${idImage}/full/200,/0/default.jpg`}
-      width={160}
-      height={160}
-      alt={alt}
-      className={`${!styles ? "object-contain h-full w-full" : styles}`}
-      onLoad={() => setLoadingImage(false)}
-      onError={() => {
-        if (src !== "/not_avaible.png") setSrc("/not_avaible.png");
-      }}
-      style={{ display: loadingImage ? 'none' : 'block' }}
-      priority={priority}
+      width={400}
+      height={400}
+      alt={alt || "Obra de arte"}
+      className="object-contain h-[340px] w-full max-w-[400px] rounded-[24px_6px_24px_6px] shadow-lg border-4"
+      loading="eager"
+      priority
+      unoptimized
     />
   );
 }
