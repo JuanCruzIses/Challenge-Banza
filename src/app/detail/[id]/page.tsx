@@ -3,31 +3,62 @@ import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { ArtworkDetailType } from "@/app/types/interface";
 import { useArtworks } from "../../store/ArtworksContext";
+import { useGetDetail } from "@/app/hooks/useGetData";
+import { useParams, useRouter } from "next/navigation";
 
 
 export default function ArtworkDetail() {
+  const router = useRouter();
   const [artworkDetail, setArtworkDetail] = useState<ArtworkDetailType | null>(null);
-  // const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const { artworks, loading, error, setNumberPage, numberPage } = useArtworks();
   const [arrayImages, setArrayImages] = useState<string[]>([]);
-  
+  const params = useParams();
+  const id = params?.id;
+  const { data: apiData } = useGetDetail(`https://api.artic.edu/api/v1/artworks/${id}`);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = sessionStorage.getItem("artworkDetail");
+      let isValidStored = false;
       if (stored) {
-        const detail = JSON.parse(stored);
-        setArtworkDetail(detail);
-        // Buscar en artworks el objeto con el mismo title
-        const found = artworks.find(a => a.title === detail.title);
-        if (found && Array.isArray(found.alt_image_ids)) {
-          setArrayImages(found.alt_image_ids);
-        } else {
-          setArrayImages([]);
+        try {
+          const parsed = JSON.parse(stored);
+          // Considera vacío si es un objeto vacío, null o string vacío
+          if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            isValidStored = true;
+            setArtworkDetail(parsed);
+            // Buscar en artworks el objeto con el mismo title
+            const found = artworks.find(a => a.title === parsed.title);
+            if (found && Array.isArray(found.alt_image_ids)) {
+              setArrayImages(found.alt_image_ids);
+            } else {
+              setArrayImages([]);
+            }
+          }
+        } catch (e) {
+          isValidStored = false;
         }
       }
+      if (!isValidStored && apiData) {
+        // Mapear los datos de la API al tipo ArtworkDetailType
+        setArtworkDetail({
+          id: apiData.id,
+          image_id: apiData.image_id,
+          title: apiData.title,
+          artist: apiData.artist_title,
+          api_link: apiData.api_link,
+          alt: apiData.thumbnail,
+          short_description: apiData.thumbnail?.alt_text || "",
+          description: apiData.description || "",
+          gallery_title: apiData.gallery_title || "",
+          subject_titles: apiData.subject_titles || [],
+          alt_image_ids: apiData.alt_image_ids || [],
+        });
+        setArrayImages(apiData.alt_image_ids || []);
+      }
     }
-  }, [artworks]);
+  }, [artworks, apiData]);
 
   const handleImageError = useCallback(() => {
     setImageError(true);
@@ -39,7 +70,14 @@ export default function ArtworkDetail() {
   const showFallback = imageError || !artworkDetail.image_id;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f7f5f0] to-[#e9e3d7] py-10 px-2">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f7f5f0] to-[#e9e3d7] py-10 px-2 relative">
+      <button
+        onClick={() => router.back()}
+        className="hidden lg:flex absolute cursor-pointer top-1 left-4 z-5 bg-black text-white rounded-lg w-12 h-12 items-center justify-center shadow-lg hover:bg-[#222] transition-colors"
+        aria-label="Volver"
+      >
+        <span className="material-symbols-outlined text-3xl">arrow_back</span>
+      </button>
       <div className="relative w-full max-w-4xl bg-[#f7f5f0] rounded-[32px_8px_32px_8px] border-8 border-[#5a3a1b] shadow-2xl flex flex-col md:flex-row overflow-hidden">
         <div className="flex flex-col items-center w-full md:w-1/2 bg-[#f0e6d6] py-6 px-2">
           <div className="flex justify-center items-center w-full mb-4">

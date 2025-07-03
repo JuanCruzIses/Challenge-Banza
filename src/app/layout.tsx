@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/headerComponents/Header";
 import Footer from "@/components/footerComponents/Footer";
 import { ArtworksProvider } from "./store/ArtworksContext";
+import { SearchResultsProvider } from "@/context/SearchResultsContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,20 +28,22 @@ export default function RootLayout({
 }>) {
   return (
     <ArtworksProvider>
-      <html lang="en">
-        <head>
-          <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-        </head>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Header />
-          <main className="min-h-[75vh]">
-            {children}
-          </main>
-          <Footer />
-        </body>
-      </html>
+      <SearchResultsProvider>
+        <html lang="en">
+          <head>
+            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+          </head>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Header />
+            <main className="min-h-[75vh]">
+              {children}
+            </main>
+            <Footer />
+          </body>
+        </html>
+      </SearchResultsProvider>
     </ArtworksProvider>
   );
 }
