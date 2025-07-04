@@ -47,13 +47,9 @@ export default function ArtworkDetail() {
           image_id: apiData.image_id,
           title: apiData.title,
           artist: apiData.artist_title,
-          api_link: apiData.api_link,
           alt: apiData.thumbnail?.alt_text || "",
-          short_description: apiData.thumbnail?.alt_text || "",
           description: apiData.description || "",
-          gallery_title: apiData.gallery_title || "",
           subject_titles: Array.isArray(apiData.subject_titles) ? apiData.subject_titles : [],
-          alt_image_ids: apiData.alt_image_ids || [],
         });
         setArrayImages(apiData.alt_image_ids || []);
       }
